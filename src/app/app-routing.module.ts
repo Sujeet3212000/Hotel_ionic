@@ -2,15 +2,19 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+{     path: '', redirectTo: 'hotel', pathMatch: 'full'   },
+  {     path: 'hotel',
+        children: [
+          {
+            path:'',
+            loadChildren: () => import('./hotel/hotel.module').then( m => m.HotelPageModule)
+          },
+          {
+            path:':hid',
+            loadChildren: () => import('./hotel/hotel-details/hotel-details.module').then( m => m.HotelDetailsPageModule)
+          }
+        ]
+},
 ];
 
 @NgModule({
